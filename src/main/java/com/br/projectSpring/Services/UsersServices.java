@@ -4,7 +4,7 @@ package com.br.projectSpring.Services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 
 import com.br.projectSpring.Repositories.UsersRepository;
