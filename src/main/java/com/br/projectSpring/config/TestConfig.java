@@ -35,29 +35,38 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-		Product prod1 = new Product(null, "Mouse", "Mouse para computador", 250.0, "");
-		Product prod2 = new Product(null, "teclado", "Mouse para computador", 150.0, "");
-		Product prod3 = new Product(null, "Livro", "O homem de giz", 400.0, "");
-		Product prod4 = new Product(null, "televisão", "Televisão 80p 4k", 9500.0, "");
-		Product prod5 = new Product(null, "mouse pad", "Mouse pad Redragon 40x80", 178.0, "");
-		
-		Category cat1 = new Category(null, "Eletronics");
+		Category cat1 = new Category(null, "Electronics");
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 		
-		Users u1 = new Users(null, "kenedy", "kndgfls5@gmail.com", "(62) 99139-6080", "92286529");
-		Users u2 = new Users(null, "talita", "talita@gmail.com", "(62) 9258-3948", "92287472");
-		Users u3 = new Users(null, "pedro", "pedrosalgadin@gmail.com", "(62) 9258-3948", "92287472");
-		
-		
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.DELIVERED, u1);
-		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.PAID, u2);
-		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
-		
-		productRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5));
-		usersRepository.saveAll(Arrays.asList(u1, u2, u3));
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3 ));
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1);
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+		Users u1 = new Users(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
+		Users u2 = new Users(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
+		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
+
+		usersRepository.saveAll(Arrays.asList(u1, u2));
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
 	}
 	
 	
